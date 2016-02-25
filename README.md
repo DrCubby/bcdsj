@@ -1,7 +1,7 @@
 # Britecore sample
 
-This is a sample application created for BriteCore
-Dennis De St Jeor
+This is a sample application created for BriteCore<br />
+Dennis De St Jeor<br />
 2016
 
 # Requirements
