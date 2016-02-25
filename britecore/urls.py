@@ -15,7 +15,21 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.auth import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    url(r'^$',TemplateView.as_view(template_name='ticket/index.html')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^login/$', views.login, {'template_name': 'ticket/login.html'}),
+    url(r'^client/add$', TemplateView.as_view(template_name='ticket/client/client_add.html'), name="client_add"),
+    url(r'^client/edit$', TemplateView.as_view(template_name='ticket/client/client_edit.html'), name="client_edit"),
+    url(r'^client/list$', TemplateView.as_view(template_name='ticket/client/client_list.html'), name="client_list"),
+    url(r'^feature/add$', TemplateView.as_view(template_name='ticket/feature/client_add.html')),
+    url(r'^feature/edit$', TemplateView.as_view(template_name='ticket/feature/client_edit.html')),
+    url(r'^feature/list$', TemplateView.as_view(template_name='ticket/feature/client_list.html')),
+    url(r'^user/add$', TemplateView.as_view(template_name='ticket/user/user_add.html')),
+    url(r'^user/edit$', TemplateView.as_view(template_name='ticket/user/user_edit.html')),
+    url(r'^user/list$', TemplateView.as_view(template_name='ticket/user/user_list.html')),
+    url(r'^user/register$', TemplateView.as_view(template_name='ticket/user/user_register.html')),
 ]
