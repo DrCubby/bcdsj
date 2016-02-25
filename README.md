@@ -1,10 +1,12 @@
 # Britecore sample
 
-Create instructions here
+This is a sample application created for BriteCore
+Dennis De St Jeor
+2016
 
 # Requirements
 
-list requirements
+* Python 2.7.5
 
 # Installation
 
