@@ -1,6 +1,6 @@
 License Summary
 		License does not expire.
-		Can be distributed in 5 projects
+		Cannot be distributed
 		Non-commercial use only
 		Cannot modify source-code for any purpose (cannot create derivative works)
 		Attribution to software creator must be made as specified:A full attribution specifying the product and any derivatives are based on my code and my solution. The attribution must contain the following details: Dennis De St Jeor Gilded Doll dennis.destjeor@gmail.com 2952 Black Creek Drive, Middleburg, FL 32068 USA
