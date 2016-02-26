@@ -1,0 +1,17 @@
+{% include 'ticket/client/client_menu.html' %}
+
+<form id="client_add" class="pure-form pure-form-aligned">
+    <fieldset>
+        <legend>Add Client</legend>
+        {% for field in form %}
+        <div class="pure-control-group">
+            <label for="{{ field.label }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <div class="pure-controls">
+            {% csrf_token %}
+            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'client_add' %}','client_add');">Add Client</div>
+        </div>
+    </fieldset>
+</form>

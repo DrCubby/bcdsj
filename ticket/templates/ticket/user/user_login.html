@@ -1,0 +1,16 @@
+<form id="user_login" class="pure-form pure-form-aligned">
+    <fieldset>
+        <legend>Login</legend>
+        {% for field in form %}
+        <div class="pure-control-group">
+            <label for="{{ field.label }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <div class="pure-controls">
+            {% csrf_token %}
+            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'user_login' %}','user_login');">Login</div>
+            <span style="color:red;">{{ form_errors }}</span>
+        </div>
+    </fieldset>
+</form>
