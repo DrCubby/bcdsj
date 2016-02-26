@@ -113,3 +113,4 @@ STATIC_URL = '/static/' # default
 STATIC_ROOT = os.path.join(BASE_DIR, 'ticket/static')
 
 
+

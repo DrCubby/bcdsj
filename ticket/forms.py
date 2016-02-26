@@ -1,5 +1,5 @@
 from django import forms
-from ticket.models import Client, Feature
+from ticket.models import Client, Feature, Product
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -24,6 +24,17 @@ class FeatureEditForm(forms.ModelForm):
 
 	class Meta:
 		model = Feature
+		fields = '__all__'
+
+class ProductAddForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+class ProductEditForm(forms.ModelForm):
+
+	class Meta:
+		model = Product
 		fields = '__all__'
 
 

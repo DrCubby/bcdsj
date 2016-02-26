@@ -14,10 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+from django.contrib.auth.decorators import login_required
 from django.contrib import admin
 from django.contrib.auth import views
 from django.views.generic import TemplateView
-from ticket.views import ClientAdd, ClientDelete,ClientEdit, ClientList, UserAdd, FeatureAdd, FeatureDelete, FeatureEdit, FeatureList, UserDelete, UserEdit, UserList
+from ticket.views import ClientAdd, ClientDelete,ClientEdit, ClientList, UserAdd, FeatureAdd, FeatureDelete,\
+    FeatureEdit, FeatureList, ProductAdd, ProductDelete, ProductEdit, ProductList, UserDelete, UserEdit, UserList
+
 
 urlpatterns = [
     url(r'^$',TemplateView.as_view(template_name='ticket/base/base.html')),
@@ -31,9 +34,13 @@ urlpatterns = [
     url(r'^feature/delete/(?P<pk>\d+)/$', FeatureDelete.as_view(), name="feature_delete"),
     url(r'^feature/edit/(?P<pk>\d+)/$', FeatureEdit.as_view(),name='feature_edit'),
     url(r'^feature/list$', FeatureList.as_view(), name='feature_list'),
+    url(r'^product/add$', ProductAdd.as_view(), name='product_add'),
+    url(r'^product/delete/(?P<pk>\d+)/$', ProductDelete.as_view(), name="product_delete"),
+    url(r'^product/edit/(?P<pk>\d+)/$', ProductEdit.as_view(),name='product_edit'),
+    url(r'^product/list$', ProductList.as_view(), name='product_list'),
     url(r'^user/add$', UserAdd.as_view(), name='user_add'),
     url(r'^user/delete/(?P<pk>\d+)/$', UserDelete.as_view(), name='user_delete'),
     url(r'^user/edit/(?P<pk>\d+)/$', UserEdit.as_view(), name='user_edit'),
-    url(r'^user/list$', UserList.as_view(), name='user_list'),
+    url(r'^user/list$', login_required(UserList.as_view(),{'next_page': '/'}), name='user_list'),
     url(r'^user/register$', TemplateView.as_view(template_name='ticket/user/user_register.html')),
-]
+    url(r'^logout/$', 'django.contrib.auth.views.logout',{'next_page': '/'},name='logout')]

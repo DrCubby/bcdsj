@@ -1,7 +1,11 @@
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth import get_user_model
-from ticket.forms import UserAddForm, UserEditForm, FeatureAddForm, FeatureEditForm, ClientAddForm, ClientEditForm
-from ticket.models import Client, Feature
+from django.contrib.auth import get_user_model, logout
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from ticket.forms import UserAddForm, UserEditForm, FeatureAddForm, FeatureEditForm, ClientAddForm, ClientEditForm,\
+    ProductAddForm, ProductEditForm
+from ticket.models import Client, Feature, Product
 from django.core.urlresolvers import reverse_lazy
 from braces import views
 User =  get_user_model()
@@ -79,10 +83,12 @@ class ClientDelete(DeleteView):
     permissions = 'ticket.delete_client'
     success_url = reverse_lazy('client_list')
 
-class ClientList(ListView, views.PermissionRequiredMixin):
+class ClientList(ListView, views.PermissionRequiredMixin, views.LoginRequiredMixin):
     """
     List of existing users.
     """
+    login_url = reverse_lazy('user_ass')
+    redirect_field_name = 'redirect_to'
     model = Client
     form_class = ClientAddForm
     permissions = 'ticket.change_client'
@@ -123,4 +129,45 @@ class FeatureList(ListView, views.PermissionRequiredMixin):
     form_class = FeatureAddForm
     permissions = 'ticket.change_feature'
     template_name = 'ticket/feature/feature_list.html'
+
+class ProductAdd(CreateView, views.PermissionRequiredMixin):
+    """
+        Add a client.
+    """
+    model = Product
+    form_class = ProductAddForm
+    permissions = 'ticket.add_product'
+    template_name = 'ticket/product/product_add.html'
+    success_url = reverse_lazy('product_list')
+
+class ProductEdit(UpdateView):
+    """
+        Edit a user
+    """
+    model = Product
+    form_class = ProductEditForm
+    template_name = 'ticket/product/product_edit.html'
+    success_url = reverse_lazy('product_list')
+
+class ProductDelete(DeleteView):
+    """
+        Delete a user
+    """
+    model = Product
+    permissions = 'ticket.delete_product'
+    success_url = reverse_lazy('product_list')
+
+class ProductList(ListView, views.PermissionRequiredMixin, views.LoginRequiredMixin):
+    """
+    List of existing users.
+    """
+    model = Product
+    form_class = ProductAddForm
+    permissions = 'ticket.change_product'
+    template_name = 'ticket/product/product_list.html'
+    login_url = reverse_lazy('user_add')
+    #redirect_field_name = 'redirect_to'
+
+
+
 

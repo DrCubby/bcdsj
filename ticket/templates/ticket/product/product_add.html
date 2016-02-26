@@ -1,8 +1,8 @@
-{% include 'ticket/feature/feature_menu.html' %}
+{% include 'ticket/product/product_menu.html' %}
 
-<form id="feature_edit" class="pure-form pure-form-aligned">
+<form id="product_add" class="pure-form pure-form-aligned">
     <fieldset>
-        <legend>Edit Feature</legend>
+        <legend>Add Product</legend>
         {% for field in form %}
         <div class="pure-control-group">
             <label for="{{ field.label }}">{{ field.label }}</label>
@@ -11,7 +11,7 @@
         {% endfor %}
         <div class="pure-controls">
             {% csrf_token %}
-            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'feature_edit' pk=object.id %}','feature_edit');">Update Feature</div>
+            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'product_add' %}','product_add');">Add Product</div>
         </div>
     </fieldset>
 </form>

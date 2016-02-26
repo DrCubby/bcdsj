@@ -1,0 +1,21 @@
+{% include 'ticket/product/product_menu.html' %}
+
+<table class="pure-table" style="width:800px;">
+    <thead>
+        <tr>
+            <th>ID {% user.username %}</th>
+            <th>Name</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td>{{ object.id }}</td>
+            <td><a href="#" onclick="getFragment('{%  url 'product_edit' pk=object.id %}','token')">{{ object.name}}</a></td>
+            <td><a href="#" onclick="getFragment('{%  url 'product_delete' pk=object.id %}','product_delete')">del</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
