@@ -1,8 +1,12 @@
-{% include 'ticket/user/user_menu.html' %}
+{% if user.is_authenticated %}{% include 'ticket/user/user_menu.html' %}{% endif %}
 
 <form id="user_add" class="pure-form pure-form-aligned">
     <fieldset>
-        <legend>Add User</legend>
+        {% if user.is_authenticated %}
+            <legend>Add User</legend>
+        {%  else %}
+            <legend>Register</legend>
+        {% endif %}
         {% for field in form %}
         <div class="pure-control-group">
             <label for="{{ field.label }}">{{ field.label }}</label>
@@ -11,7 +15,8 @@
         {% endfor %}
         <div class="pure-controls">
             {% csrf_token %}
-            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'user_add' %}','user_add');">Add User</div>
+            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'user_add' %}','user_add');">{% if user.is_authenticated %}Add User{% else %}Register{% endif %}</div>
+            <span style="color:red;">{{ form.errors }}</span>
         </div>
     </fieldset>
 </form>

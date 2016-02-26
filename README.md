@@ -28,7 +28,7 @@ Dennis De St Jeor<br />
 * Let's go ahead and make sure your database is up to date:<br />
 	$ python manage.py migrate<br />
 * Let's start the builtin webserver in django<br />
-	$ python manage.py runserver<br />
+	$ python manage.py runserver --insecure<br />
 * in your browser type:<br />
 	http://127.0.0.1:8000<br />
 

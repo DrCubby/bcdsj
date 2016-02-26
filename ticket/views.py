@@ -1,60 +1,14 @@
-from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth import get_user_model, logout
-from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
+from django.contrib.auth import authenticate, login,logout,get_user_model, logout
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
-from ticket.forms import UserAddForm, UserEditForm, FeatureAddForm, FeatureEditForm, ClientAddForm, ClientEditForm,\
-    ProductAddForm, ProductEditForm
+from ticket.forms import  ClientAddForm, ClientEditForm, FeatureAddForm, FeatureEditForm,  ProductAddForm, \
+    ProductEditForm, UserAddForm, UserEditForm, UserLoginForm
 from ticket.models import Client, Feature, Product
 from django.core.urlresolvers import reverse_lazy
 from braces import views
 User =  get_user_model()
-
-class UserAdd(CreateView, views.PermissionRequiredMixin):
-    """
-        Add a user.
-    """
-    model = User
-    form_class = UserAddForm
-    permissions = 'auth.add_user'
-    template_name = 'ticket/user/user_add.html'
-    success_url = reverse_lazy('user_list')
-
-    def form_valid(self, form):
-		"""
-		    Save this form
-		"""
-		form.instance.editor = self.request.user
-		# Hash the password entered in the form.
-		#form.instance.set_password(form.instance.password)
-		form.instance.save()
-		return super(UserAdd, self).form_valid(form)
-
-class UserEdit(UpdateView):
-    """
-        Edit a user
-    """
-    model = User
-    form_class = UserEditForm
-    template_name = 'ticket/user/user_edit.html'
-    success_url = reverse_lazy('user_list')
-
-class UserDelete(DeleteView):
-    """
-        Delete a user
-    """
-    model = User
-    permissions = 'auth.delete_user'
-    success_url = reverse_lazy('user_list')
-
-class UserList(ListView, views.PermissionRequiredMixin):
-    """
-    List of existing users.
-    """
-    model = User
-    form_class = UserAddForm
-    permissions = 'auth.change_user'
-    template_name = 'ticket/user/user_list.html'
 
 class ClientAdd(CreateView, views.PermissionRequiredMixin):
     """
@@ -168,6 +122,63 @@ class ProductList(ListView, views.PermissionRequiredMixin, views.LoginRequiredMi
     login_url = reverse_lazy('user_add')
     #redirect_field_name = 'redirect_to'
 
+class UserAdd(CreateView, views.PermissionRequiredMixin):
+    """
+        Add a user.
+    """
+    model = User
+    form_class = UserAddForm
+    permissions = 'auth.add_user'
+    template_name = 'ticket/user/user_add.html'
+    success_url = reverse_lazy('user_list')
 
+    def form_valid(self, form):
+        """
+            Save this form
+        """
+        form.instance.editor = self.request.user
+        # Hash the password entered in the form.
+        #form.instance.set_password(form.instance.password)
+        form.instance.save()
+        return super(UserAdd, self).form_valid(form)
 
+class UserEdit(UpdateView):
+    """
+        Edit a user
+    """
+    model = User
+    form_class = UserEditForm
+    template_name = 'ticket/user/user_edit.html'
+    success_url = reverse_lazy('user_list')
 
+class UserList(ListView, views.PermissionRequiredMixin):
+    """
+    List of existing users.
+    """
+    model = User
+    form_class = UserAddForm
+    permissions = 'auth.change_user'
+    template_name = 'ticket/user/user_list.html'
+
+def UserLogin(request):
+    logout(request)
+    username = password = ''
+    context ={}
+
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return render(request,'ticket/base/redirect.html')
+        else:
+            context['form'] = UserLoginForm()
+            context['form_errors'] = 'your username and/or password does not exist'
+            return render(request,'ticket/user/user_login.html', context)
+    else:
+        context['form'] = UserLoginForm()
+        return render(request,'ticket/user/user_login.html', context)
+    return render_to_response('ticket/user/user_login.html', context)

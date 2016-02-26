@@ -77,3 +77,13 @@ class UserEditForm(forms.ModelForm):
 		widgets = {
 			'username': forms.TextInput(attrs={"autocomplete":"off",}),
 		}
+class UserLoginForm(forms.ModelForm):
+
+	class Meta:
+		model = User
+		fields = [
+			'username', 'password'
+		]
+		widgets = {
+			'username': forms.TextInput(attrs={"autocomplete":"off",}),
+		}
