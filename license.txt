@@ -10,15 +10,12 @@ BCDSJ - Terms and conditions
 	.	Preamble: This Agreement, signed on Feb 26, 2016 (hereinafter: Effective Date) governs the relationship between Phil Reynolds, a Business Entity, (hereinafter: Licensee) and Gilded Doll, a duly registered company in whose principal place of business is 2952 Black Creek Dr, Middleburg, FL 32068 (hereinafter: Licensor). This Agreement sets the terms, rights, restrictions and obligations on using BCDSJ (hereinafter: The Software) created and owned by Licensor, as detailed herein
 	.	License Grant: Licensor hereby grants Licensee a Personal, Non-assignable & non-transferable, Pepetual, Non-commercial, Without the rights to create derivative works, Non-exclusive license, all with accordance with the terms set forth and other legal restrictions set forth in 3rd party software used while running Software.
 	.	Limited: Licensee may use Software for the purpose of:
-	.	Running Software on Licensee’s Website[s] and Server[s];
-	.	Allowing 3rd Parties to run Software on Licensee’s Website[s] and Server[s];
-	.	Publishing Software’s output to Licensee and 3rd Parties;
-	.	Distribute verbatim copies of Software’s output (including compiled binaries);
-	.	Modify Software to suit Licensee’s needs and specifications.
+	.	Running Software on Licensee’s single server for one user;
+	.	Publishing Software’s output to Licensee;
 	.	This license is granted perpetually, as long as you do not materially breach it.
 	.	Binary Restricted: Licensee may sublicense Software as a part of a larger work containing more than Software, distributed solely in Object or Binary form under a personal, non-sublicensable, limited license. Such redistribution shall be limited to unlimited codebases.
 	.	Non Assignable & Non-Transferable: Licensee may not assign or transfer his rights and duties under this license.
-	.	Non-Commercial: Licensee may not use Software for commercial purposes. for the purpose of this license, commercial purposes means that a 3rd party has to pay in order to access Software or that the Website that runs Software is behind a paywall.
+	.	Non-Commercial: Licensee may not use Software for commercial purposes. for the purpose of this license, commercial purposes means that a 3rd party has to pay in order to access Software or that the Website that runs Software is behind a paywall or the Licensee uses this software in the administration of a commercial business.
 	.	With Attribution Requirements﻿: A full attribution specifying the product and any derivatives are based on my code and my solution. The attribution must contain the following details: Dennis De St Jeor Gilded Doll dennis.destjeor@gmail.com 2952 Black Creek Drive, Middleburg, FL 32068 USA
 	.	Term & Termination: The Term of this license shall be until terminated. Licensor may terminate this Agreement, including Licensee’s license in the case where Licensee :
 	.	became insolvent or otherwise entered into any liquidation process; or
