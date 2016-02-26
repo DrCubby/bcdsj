@@ -16,6 +16,7 @@ class Feature(models.Model):
     client = models.ForeignKey(Client, default=0, on_delete=models.CASCADE)
     priority = models.IntegerField(blank=False,default=0,null=False)
     description = models.TextField()
+    url = models.URLField(blank=True)
     date_created = models.DateTimeField(default=timezone.now)
     date_target = models.DateTimeField(blank=True, null=True)
 
