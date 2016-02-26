@@ -1,2 +1,17 @@
-{{  load static }}
-add feature
+{% include 'ticket/feature/feature_menu.html' %}
+
+<form id="feature_add" class="pure-form pure-form-aligned">
+    <fieldset>
+        <legend>Add Feature</legend>
+        {% for field in form %}
+        <div class="pure-control-group">
+            <label for="{{ field.label }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <div class="pure-controls">
+            {% csrf_token %}
+            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'feature_add' %}','feature_add');">Add Feature</div>
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,53 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example with a side menu that hides on mobile, just like the Pure website.">
+    <title>Responsive Side Menu &ndash; Layout Examples &ndash; Pure</title>
+
+    <link rel="stylesheet" href="{%  static 'css/pure-release-0.6.0/pure-min.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/pure-release-0.6.0/menus-min.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/pure-release-0.6.0/forms-min.css' %}">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="{%  static 'css/base/side-menu-old-ie.css' %}">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="{%  static 'css/base/side-menu.css' %}">
+    <!--<![endif]-->
+
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="{% static 'js/base/js.cookie.js' %}"></script>
+    <script src="{%  static 'js/base/base.js' %}"></script>
+
+</head>
+<body>
+<div id="layout">
+    <form id="token">{% csrf_token %}<input type="hidden" name="theType" value="form"><input type="hidden" id="pk" name="id" value=""></form>
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+
+    <div id="menu">
+        <div class="pure-menu">
+            <a class="pure-menu-heading" href="#">BriteCore</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
+                <li class="pure-menu-item"><div class="pure-menu-link" onclick="getFragment('{%  url 'feature_list' %}','token')">Features</div></li>
+                <li class="pure-menu-item"><div class="pure-menu-link" onclick="getFragment('{%  url 'client_list' %}','token')">Clients</div></li>
+                <li class="pure-menu-item"><div class="pure-menu-link" onclick="getFragment('{%  url 'user_list' %}','token')">Users</div></li>
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="main">
+        <div id="content-fragment" class="content">sdf</div>
+    </div>
+</div>
+<script src="{%  static 'js/base/ui.js' %}"></script>
+</body>
+</html>
