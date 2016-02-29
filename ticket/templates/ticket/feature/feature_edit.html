@@ -22,7 +22,7 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Client</th>
+            <th style="width:100%;">Client</th>
             <th>Priority</th>
             <th>Target Date</th>
             <th>Delete</th>
@@ -36,7 +36,7 @@
             <td><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=feature.id %}','token')">{{ feature.client.name}}</a></td>
             <td><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=feature.id %}','token')">{{ feature.priority}}</a></td>
             <td><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=feature.id %}','token')">{{ feature.date_target|date:"Y-m-d"}}</a></td>
-            <td><a href="#" onclick="getFragment('{%  url 'feature_delete' pk=feature.id %}','product_delete')">del</a></td>
+            <td><a class="button-delete" href="#" onclick="getFragment('{%  url 'feature_delete' pk=feature.id %}','product_delete')">X</a></td>
         </tr>
         {% endfor %}
     </tbody>

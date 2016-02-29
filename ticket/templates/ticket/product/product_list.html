@@ -4,7 +4,7 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th style="width:100%;">Name</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -14,7 +14,7 @@
         <tr>
             <td>{{ object.id }}</td>
             <td><a href="#" onclick="getFragment('{%  url 'product_edit' pk=object.id %}','token')">{{ object.name}}</a></td>
-            <td><a href="#" onclick="getFragment('{%  url 'product_delete' pk=object.id %}','product_delete')">del</a></td>
+            <td><a class="button-delete" href="#" onclick="getFragment('{%  url 'product_delete' pk=object.id %}','product_delete')">X</a></td>
         </tr>
         {% endfor %}
     </tbody>

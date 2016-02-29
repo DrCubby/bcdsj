@@ -14,12 +14,6 @@ function getFragment(url,theForm,theID) {
     var csrftoken = $('#token').find("input[name='csrfmiddlewaretoken']").val()
     var formData = new FormData(document.getElementById(theForm));
 
-    // loop through the form and append any file data
-    // this is not required in every browser
-    $.each($('#' + theForm)[0].files, function(i, file) {
-        data.append('file-'+i, file);
-    });
-
     // setup ajax by submitting csrf token if required
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {

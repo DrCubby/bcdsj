@@ -16,15 +16,16 @@ class ClientEditForm(forms.ModelForm):
 		fields = '__all__'
 
 class FeatureAddForm(forms.ModelForm):
-    class Meta:
-        model = Feature
-        fields = '__all__'
+
+	class Meta:
+		model = Feature
+		exclude =['date_created']
 
 class FeatureEditForm(forms.ModelForm):
 
 	class Meta:
 		model = Feature
-		fields = '__all__'
+		exclude =['date_created']
 
 class ProductAddForm(forms.ModelForm):
     class Meta:
