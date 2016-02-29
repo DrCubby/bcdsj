@@ -29,6 +29,11 @@ class ClientEdit(UpdateView):
     template_name = 'ticket/client/client_edit.html'
     success_url = reverse_lazy('client_list')
 
+    def get_context_data(self, **kwargs):
+        context = super(ClientEdit, self).get_context_data(**kwargs)
+        context['features'] = Feature.objects.filter(client_id=self.kwargs.get('pk')).order_by('client__name','priority','date_target')
+        return context
+
 class ClientDelete(DeleteView):
     """
         Delete a user
@@ -102,6 +107,11 @@ class ProductEdit(UpdateView):
     form_class = ProductEditForm
     template_name = 'ticket/product/product_edit.html'
     success_url = reverse_lazy('product_list')
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductEdit, self).get_context_data(**kwargs)
+        context['features'] = Feature.objects.filter(product_id=self.kwargs.get('pk')).order_by('client__name','priority','date_target')
+        return context
 
 class ProductDelete(DeleteView):
     """

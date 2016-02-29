@@ -11,7 +11,35 @@
         {% endfor %}
         <div class="pure-controls">
             {% csrf_token %}
-            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'product_edit' pk=object.id %}','product_edit');">Update Product</div>
+            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'product_edit' pk=object.id %}','product_edit');return false;">Update Product</div>
         </div>
     </fieldset>
 </form>
+{%  if features %}
+<div style="margin-top:20px;">Features</div>
+<table class="pure-table" style="width:800px;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Client</th>
+            <th>Priority</th>
+            <th>Target Date</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for feature in features %}
+        <tr>
+            <td>{{ feature.id }}</td>
+            <td><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=feature.id %}','token')">{{ feature.title}}</a></td>
+            <td><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=feature.id %}','token')">{{ feature.client.name}}</a></td>
+            <td><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=feature.id %}','token')">{{ feature.priority}}</a></td>
+            <td><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=feature.id %}','token')">{{ feature.date_target|date:"Y-m-d"}}</a></td>
+            <td><a href="#" onclick="getFragment('{%  url 'feature_delete' pk=feature.id %}','product_delete')">del</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}

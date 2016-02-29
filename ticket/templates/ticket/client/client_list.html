@@ -14,7 +14,7 @@
         <tr>
             <td>{{ object.id }}</td>
             <td><a href="#" onclick="getFragment('{%  url 'client_edit' pk=object.id %}','token')">{{ object.name }}</a></td>
-            <td><a href="#" onclick="getFragment('{%  url 'client_delete' pk=object.id %}','client_delete')">del</a></td>
+            <td><a href="#" onclick="getFragment('{%  url 'client_delete' pk=object.id %}','client_delete');return false;">del</a></td>
         </tr>
         {% endfor %}
     </tbody>
