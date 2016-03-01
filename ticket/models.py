@@ -32,4 +32,3 @@ class Feature(models.Model):
 
 
 
-
