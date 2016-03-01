@@ -40,7 +40,7 @@
     <form id="token">{% csrf_token %}<input type="hidden" name="theType" value="form"><input type="hidden" id="pk" name="id" value=""></form>
     <div id="menu">
         <div class="pure-menu">
-            <a class="pure-menu-heading" href="#">BCDSJ</a>
+            <a class="pure-menu-heading" href="/">BCDSJ</a>
             <ul class="pure-menu-list">
                 {% if user.is_authenticated %}
                 <li class="pure-menu-item"><div class="pure-menu-link" onclick="getFragment('{%  url 'feature_list' %}','token')">Features</div></li>
@@ -59,8 +59,8 @@
         <div id="content-fragment" class="content" style="padding-top:60px;">
             {% if user.is_authenticated %}
                 <div >
-                    Welcome {{ user.first_name }}
-                    <p>That's better isn't it?  Great...go ahead and get started using the menu</p>
+                    {{ user.first_name }}!  It's you!
+                    <p>This is exciting isn't it?  Great...go ahead and get started using the menu</p>
                     <p> <-- over there.</p>
                     <p>Enjoy!</p>
                 </div>
