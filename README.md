@@ -55,6 +55,8 @@ A:  Sure.  No problem.  There are many things I would add to this project if it 
 Q:  What is the most profound question ever asked?<br />
 A:  Socrates: "I drank what?"
 
+# STACKOVERFLOW is your friend
+
 
 
 
