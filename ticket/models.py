@@ -17,7 +17,7 @@ class Product(models.Model):
         return self.name
 
 class Feature(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=50)
     client = models.ForeignKey(Client, default=0, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, default=0, on_delete=models.CASCADE)
     priority = models.IntegerField(blank=False,default=1,null=False)

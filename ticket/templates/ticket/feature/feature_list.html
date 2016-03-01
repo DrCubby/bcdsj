@@ -17,8 +17,8 @@
         <tr>
             <td>{{ object.priority }}</td>
             <td><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=object.id %}','token')">{{ object.title}}</a></td>
-            <td><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=object.id %}','token')">{{ object.client.name}}</a></td>
-            <td><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=object.id %}','token')">{{ object.product.name}}</a></td>
+            <td style="white-space: nowrap;"><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=object.id %}','token')">{{ object.client.name}}</a></td>
+            <td style="white-space: nowrap;"><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=object.id %}','token')">{{ object.product.name}}</a></td>
             <td><a class="button-delete" href="#" onclick="getFragment('{%  url 'feature_delete' pk=object.id %}','feature_delete')">X</a></td>
         </tr>
         {% endfor %}
