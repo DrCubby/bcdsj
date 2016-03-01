@@ -35,7 +35,7 @@ Dennis De St Jeor<br />
 # Questions You May Have
 
 Q:  Where are the tests?<br />
-A:  I didn't write any.  While I can write functional and unit tests, this app is so standard Django (extensively tested) that I felt no need.<br />
+A:  I didn't write any.  While I can write functional and unit tests, this app is so standard Django (extensively tested) that I felt no need. Not a big fan of "did I get a response" testing.<br />
 <br />
 Q:  Did you use TDD?<br />
 A:  No...see above.<br />
@@ -47,7 +47,7 @@ Q:  Why did you use pure css?<br />
 A:  I thought about skeleton and/or min but pure is small and as functional as I needed.  I don't believe in excess junk laying around<br />
 <br />
 Q:  Where's the angular<br />
-A:  2 reasons:  1) Too much for a demo project.  Yes, I know it and use it daily. 2) Django's template markup and Angular are identical and given the nature of the project, I didn't think it would prove anything to modify django's template markup to allow for angualar<br />
+A:  2 reasons:  1) Too much for a demo project.  Yes, I know it and use it daily but here I chose to just use jquery and jquery ui. 2) Django's template markup and Angular are identical and given the nature of the project, I didn't think it would prove anything to modify django's template markup to allow for angualar<br />
 <br />
 Q:  Some things are missing like forgotten password<br />
 A:  Sure.  No problem.  There are many things I would add to this project if it were a live system but it's not. It's a demo on my ability to not just understand and issue but to execute in an organized, thoughtful, extensible way.
