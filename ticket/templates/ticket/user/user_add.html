@@ -1,9 +1,9 @@
 {% if user.is_authenticated %}{% include 'ticket/user/user_menu.html' %}{% endif %}
-
+<script>menuSwitch('Add');</script>
 <form id="user_add" class="pure-form pure-form-aligned">
     <fieldset>
         {% if user.is_authenticated %}
-            <legend>Add User</legend>
+            <legend class="legend">Add User</legend>
         {%  else %}
             <legend>Register</legend>
         {% endif %}
@@ -11,12 +11,16 @@
         <div class="pure-control-group">
             <label for="{{ field.label }}">{{ field.label }}</label>
             {{ field }}
+            {%  if field.help_text %}<span class="bctooltip" title="{{ field.help_text }}">?</a>{% endif %}
+            {% if field.errors %}
+            <span class="bcerror" title="{% for error in field.errors %}{{ error }}
+            {% endfor %}">&bull;</a>
+            {% endif %}
         </div>
         {% endfor %}
         <div class="pure-controls">
             {% csrf_token %}
             <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'user_add' %}','user_add');return false;">{% if user.is_authenticated %}Add User{% else %}Register{% endif %}</div>
-            <span style="color:red;">{{ form.errors }}</span>
         </div>
     </fieldset>
 </form>

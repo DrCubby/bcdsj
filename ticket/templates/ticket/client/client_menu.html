@@ -1,10 +1,13 @@
 {% load static %}
-<div class="header">
-    <div class="pure-menu pure-menu-horizontal" style="text-align: right;">
+<link rel="stylesheet" href="{%  static 'css/base/menu.css' %}">
+<script src="{%  static 'js/base/menu.js' %}"></script>
+
+<div id="myh1">Client</div>
+<div class="myHeader">
+    <div id="horizontal" class="pure-menu pure-menu-horizontal" >
         <ul class="pure-menu-list">
-            <li id="object_type" class="pure-menu-item">Client</li>
-            <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link" onclick="getFragment('{% url 'client_list' %}','token')">List</a></li>
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link" onclick="getFragment('{% url 'client_add' %}','token');return false;">Add</a></li>
+            <li  id="menuList" class="pure-menu-item"><a href="#" class="pure-menu-link" onclick="getFragment('{% url 'client_list' %}','token');return false;">List</a></li>
+            <li  id="menuAdd" class="pure-menu-item"><a href="#" class="pure-menu-link" onclick="getFragment('{% url 'client_add' %}','token');return false">Add</a></li>
         </ul>
     </div>
 </div>

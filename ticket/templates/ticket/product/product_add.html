@@ -1,13 +1,19 @@
 {% include 'ticket/product/product_menu.html' %}
+<script>menuSwitch('Add');</script>
 
 <form id="product_add" class="pure-form pure-form-aligned">
     <fieldset>
-        <legend>Add Product</legend>
+        <legend class="legend">Add Product</legend>
         {% for field in form %}
         <div class="pure-control-group">
             <label for="{{ field.label }}">{{ field.label }}</label>
             {{ field }}
-        </div>
+             {%  if field.help_text %}<span class="bctooltip" title="{{ field.help_text }}">?</a>{% endif %}
+            {% if field.errors %}
+            <span class="bcerror" title="{% for error in field.errors %}{{ error }}
+            {% endfor %}">&bull;</a>
+            {% endif %}
+       </div>
         {% endfor %}
         <div class="pure-controls">
             {% csrf_token %}

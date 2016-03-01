@@ -1261,8 +1261,10 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 
 /* HORIZONTAL MENU */
 .pure-menu-horizontal {
+    margin:0;
     width: 100%;
     white-space: nowrap;
+    text-align:left;
 }
 
 .pure-menu-horizontal .pure-menu-list {

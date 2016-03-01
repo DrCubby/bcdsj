@@ -40,3 +40,8 @@ function getFragment(url,theForm,theID) {
         }
     });
 }
+
+function menuSwitch(menu) {
+    $('.pure-menu-item').removeClass('pure-menu-selected');
+    $('#menu' + menu).addClass('pure-menu-selected');
+}

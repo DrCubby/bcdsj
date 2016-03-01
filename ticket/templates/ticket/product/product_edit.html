@@ -2,11 +2,16 @@
 
 <form id="product_edit" class="pure-form pure-form-aligned">
     <fieldset>
-        <legend>Edit Product</legend>
+        <legend class="legend">Edit Product</legend>
         {% for field in form %}
         <div class="pure-control-group">
             <label for="{{ field.label }}">{{ field.label }}</label>
             {{ field }}
+            {%  if field.help_text %}<span class="bctooltip" title="{{ field.help_text }}">?</a>{% endif %}
+            {% if field.errors %}
+            <span class="bcerror" title="{% for error in field.errors %}{{ error }}
+            {% endfor %}">&bull;</a>
+            {% endif %}
         </div>
         {% endfor %}
         <div class="pure-controls">

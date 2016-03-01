@@ -19,3 +19,7 @@ fieldset input,textarea,select{
 th {
     white-space: nowrap;
 }
+
+h1 {
+    margin:0px;
+}
