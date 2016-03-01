@@ -52,8 +52,8 @@ A:  2 reasons:  1) Too much for a demo project.  Yes, I know it and use it daily
 Q:  Some things are missing like forgotten password<br />
 A:  Sure.  No problem.  There are many things I would add to this project if it were a live system but it's not. It's a demo on my ability to not just understand and issue but to execute in an organized, thoughtful, extensible way.<br />
 <br />
-Q:  What is the most influential revelation you've ever experienced?<br />
-A:  When I realized the question Socrates was dying to have answered was "I drank what?"
+Q:  What is the most profound question ever asked?<br />
+A:  Socrates: "I drank what?"
 
 
 
