@@ -17,18 +17,17 @@ class Product(models.Model):
         return self.name
 
 class Feature(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=50)
     client = models.ForeignKey(Client, default=0, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, default=0, on_delete=models.CASCADE)
-    priority = models.IntegerField(blank=False,default=0,null=False)
+    priority = models.IntegerField(blank=False,default=1,null=False)
     description = models.TextField()
+    date_target = models.DateField(blank=True, null=True)
     url = models.URLField(blank=True)
-    date_created = models.DateTimeField(default=timezone.now)
-    date_target = models.DateTimeField(blank=True, null=True)
+    date_created = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.title
-
 
 
 

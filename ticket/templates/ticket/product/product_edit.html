@@ -2,16 +2,49 @@
 
 <form id="product_edit" class="pure-form pure-form-aligned">
     <fieldset>
-        <legend>Edit Product</legend>
+        <legend class="legend">Edit Product</legend>
         {% for field in form %}
         <div class="pure-control-group">
             <label for="{{ field.label }}">{{ field.label }}</label>
             {{ field }}
+            {%  if field.help_text %}<span class="bctooltip" title="{{ field.help_text }}">?</a>{% endif %}
+            {% if field.errors %}
+            <span class="bcerror" title="{% for error in field.errors %}{{ error }}
+            {% endfor %}">&bull;</a>
+            {% endif %}
         </div>
         {% endfor %}
         <div class="pure-controls">
             {% csrf_token %}
-            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'product_edit' pk=object.id %}','product_edit');">Update Product</div>
+            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'product_edit' pk=object.id %}','product_edit');return false;">Update Product</div>
         </div>
     </fieldset>
 </form>
+{%  if features %}
+<div style="margin-top:20px;">Feature Requests</div>
+<table class="pure-table" style="width:800px;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th style="width:100%;">Name</th>
+            <th>Client</th>
+            <th>Priority</th>
+            <th>Target Date</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for feature in features %}
+        <tr>
+            <td>{{ feature.id }}</td>
+            <td><a href="#" onclick="getFragment('{%  url 'feature_edit' pk=feature.id %}','token')">{{ feature.title}}</a></td>
+            <td><a href="#" onclick="getFragment('{%  url 'client_edit' pk=feature.client_id %}','token')">{{ feature.client.name}}</a></td>
+            <td>{{ feature.priority}}</td>
+            <td>{{ feature.date_target|date:"Y-m-d"}}</td>
+            <td><a class="button-delete" href="#" onclick="getFragment('{%  url 'feature_delete' pk=feature.id %}','product_delete')">X</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}

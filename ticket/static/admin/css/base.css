@@ -56,11 +56,13 @@ h1,h2,h3,h4,h5 {
     font-weight: bold;
 }
 
-h1 {
-    margin: 0 0 20px;
+h1 h1.menu {
     font-weight: 300;
     font-size: 20px;
     color: #666;
+}
+h1.menu {
+    margin:0 !important;
 }
 
 h2 {
@@ -812,7 +814,6 @@ table#change-history tbody th {
 #header {
     width: auto;
     height: 40px;
-    padding: 10px 40px;
     background: #417690;
     line-height: 40px;
     color: #ffc;
@@ -965,3 +966,10 @@ table#change-history tbody th {
 .popup #header {
     padding: 10px 20px;
 }
+
+.myHeader {
+    margin:0;
+    padding:0;
+    text-align: left;
+}
+

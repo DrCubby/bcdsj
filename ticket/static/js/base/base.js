@@ -4,18 +4,17 @@ function csrfSafeMethod(method) {
 }
 
 function getFragment(url,theForm,theID) {
-    var method = 'POST';
-    // If we're loading just an empty form change method to GET
-    if(theForm == 'token') { method = 'GET'; } else { method = 'POST'; }
-    if(theID != undefined) {
-        document.getElementById('pk').value = theID;
-        method = 'GET';
-    }
-
-    //var csrftoken = $.cookie('csrftoken');
-    //var csrftoken = getCookie('csrftoken');
+    /*
+       get/post django fragment request
+       url: the django response url
+       theForm: the form data being sent.  supports file uploads using FormData
+       theID:  the idea (if any) of the get object being requested
+     */
+    var method = theForm == 'token'? 'GET':'POST';
     var csrftoken = $('#token').find("input[name='csrfmiddlewaretoken']").val()
+    var formData = new FormData(document.getElementById(theForm));
 
+    // setup ajax by submitting csrf token if required
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -24,19 +23,25 @@ function getFragment(url,theForm,theID) {
         }
     });
 
-    var fd = new FormData(document.getElementById(theForm));
-    //$('#content-fragment').html('');
+    // clear the retainer
+    // go get it
+    $('#content-fragment').html('');
     $.ajax({
         url: url,
         type: method,
-        data: fd,
+        data: formData,
         processData: false,
         contentType: false,
         success: function (data, textStatus, jqXHR) {
             $('#content-fragment').html(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            //alert('ERROR: ' + errorThrown);
+            console.log('ERROR: ' + errorThrown);
         }
     });
+}
+
+function menuSwitch(menu) {
+    $('.pure-menu-item').removeClass('pure-menu-selected');
+    $('#menu' + menu).addClass('pure-menu-selected');
 }

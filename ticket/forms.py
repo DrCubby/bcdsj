@@ -16,15 +16,20 @@ class ClientEditForm(forms.ModelForm):
 		fields = '__all__'
 
 class FeatureAddForm(forms.ModelForm):
-    class Meta:
-        model = Feature
-        fields = '__all__'
-
-class FeatureEditForm(forms.ModelForm):
+	client = forms.ModelChoiceField(queryset=Client.objects.order_by('name'))
+	product = forms.ModelChoiceField(queryset=Product.objects.order_by('name'))
 
 	class Meta:
 		model = Feature
-		fields = '__all__'
+		exclude =['date_created']
+
+class FeatureEditForm(forms.ModelForm):
+	client = forms.ModelChoiceField(queryset=Client.objects.order_by('name'))
+	product = forms.ModelChoiceField(queryset=Product.objects.order_by('name'))
+
+	class Meta:
+		model = Feature
+		exclude =['date_created']
 
 class ProductAddForm(forms.ModelForm):
     class Meta:

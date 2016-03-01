@@ -1,0 +1,29 @@
+#myh1 {
+    color: ccc;
+    font-size:24pt;
+    font-weight:700;
+    margin-left:15px;
+    padding:0px;
+    text-align: left;
+}
+
+#horizontal {
+    padding:0;
+    margin:0;
+    text-align: left;"
+}
+.bctooltip {
+    margin:5px;
+    color:blue;
+}
+.bcerror {
+    background-color:red;
+    color:white;
+    padding-left:5px;
+    padding-right:5px;
+    margin:5px;
+}
+
+.legend {
+    margin-left:15px;
+}

@@ -1,6 +1,7 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth import authenticate, login,logout,get_user_model, logout
 from django.shortcuts import render, render_to_response
+from django.db.models import F
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from ticket.forms import  ClientAddForm, ClientEditForm, FeatureAddForm, FeatureEditForm,  ProductAddForm, \
@@ -29,6 +30,11 @@ class ClientEdit(UpdateView):
     template_name = 'ticket/client/client_edit.html'
     success_url = reverse_lazy('client_list')
 
+    def get_context_data(self, **kwargs):
+        context = super(ClientEdit, self).get_context_data(**kwargs)
+        context['features'] = Feature.objects.filter(client_id=self.kwargs.get('pk')).order_by('client__name','priority','date_target')
+        return context
+
 class ClientDelete(DeleteView):
     """
         Delete a user
@@ -48,6 +54,9 @@ class ClientList(ListView, views.PermissionRequiredMixin, views.LoginRequiredMix
     permissions = 'ticket.change_client'
     template_name = 'ticket/client/client_list.html'
 
+    def get_queryset(self):
+        return Client.objects.all().order_by('name')
+
 class FeatureAdd(CreateView, views.PermissionRequiredMixin):
     """
         Add a client.
@@ -58,6 +67,10 @@ class FeatureAdd(CreateView, views.PermissionRequiredMixin):
     template_name = 'ticket/feature/feature_add.html'
     success_url = reverse_lazy('feature_list')
 
+    def form_valid(self, form):
+        features = Feature.objects.filter(client_id = form.instance.client_id).filter(priority__gte=form.instance.priority).update(priority=F('priority')+1)
+        return super(FeatureAdd, self).form_valid(form)
+
 class FeatureEdit(UpdateView):
     """
         Edit a user
@@ -67,6 +80,10 @@ class FeatureEdit(UpdateView):
     template_name = 'ticket/feature/feature_edit.html'
     success_url = reverse_lazy('feature_list')
 
+    def form_valid(self, form):
+        features = Feature.objects.filter(client_id = form.instance.client_id).filter(priority__gte=form.instance.priority).update(priority=F('priority')+1)
+        return super(FeatureEdit, self).form_valid(form)
+
 class FeatureDelete(DeleteView):
     """
         Delete a user
@@ -75,7 +92,7 @@ class FeatureDelete(DeleteView):
     permissions = 'ticket.delete_feature'
     success_url = reverse_lazy('feature_list')
 
-class FeatureList(ListView, views.PermissionRequiredMixin):
+class FeatureList(ListView, views.PermissionRequiredMixin, ):
     """
     List of existing users.
     """
@@ -83,6 +100,9 @@ class FeatureList(ListView, views.PermissionRequiredMixin):
     form_class = FeatureAddForm
     permissions = 'ticket.change_feature'
     template_name = 'ticket/feature/feature_list.html'
+
+    def get_queryset(self):
+        return Feature.objects.all().order_by('client__name','priority')
 
 class ProductAdd(CreateView, views.PermissionRequiredMixin):
     """
@@ -103,6 +123,11 @@ class ProductEdit(UpdateView):
     template_name = 'ticket/product/product_edit.html'
     success_url = reverse_lazy('product_list')
 
+    def get_context_data(self, **kwargs):
+        context = super(ProductEdit, self).get_context_data(**kwargs)
+        context['features'] = Feature.objects.filter(product_id=self.kwargs.get('pk')).order_by('client__name','priority','date_target')
+        return context
+
 class ProductDelete(DeleteView):
     """
         Delete a user
@@ -120,7 +145,9 @@ class ProductList(ListView, views.PermissionRequiredMixin, views.LoginRequiredMi
     permissions = 'ticket.change_product'
     template_name = 'ticket/product/product_list.html'
     login_url = reverse_lazy('user_add')
-    #redirect_field_name = 'redirect_to'
+
+    def get_queryset(self):
+        return Product.objects.all().order_by('name')
 
 class UserAdd(CreateView, views.PermissionRequiredMixin):
     """
@@ -159,6 +186,9 @@ class UserList(ListView, views.PermissionRequiredMixin):
     form_class = UserAddForm
     permissions = 'auth.change_user'
     template_name = 'ticket/user/user_list.html'
+
+    def get_queryset(self):
+        return User.objects.all().order_by('username')
 
 def UserLogin(request):
     logout(request)
