@@ -44,8 +44,8 @@ class ProductEditForm(forms.ModelForm):
 
 
 class UserAddForm(forms.ModelForm):
-
-	confirm_password = forms.CharField(label=("Password (again)"), max_length=17, min_length=8, widget=forms.PasswordInput(attrs={'autocomplete':'off'}))
+	password = forms.CharField(label=("Password"), max_length=17, min_length=8, widget=forms.PasswordInput(attrs={'autocomplete':'off','type':'password'}))
+	confirm_password = forms.CharField(label=("Password (again)"), max_length=17, min_length=8, widget=forms.PasswordInput(attrs={'autocomplete':'off','type':'password'}))
 
 	class Meta:
 		model = User
@@ -71,6 +71,13 @@ class UserAddForm(forms.ModelForm):
 		else:
 			self.add_error('confirm_password', 'The passwords must match.')
 		return cleaned_data
+
+	def save(self, commit=True):
+		user = super(UserAddForm, self).save(commit=False)
+		user.set_password(self.cleaned_data["password"])
+		if commit:
+			user.save()
+		return user
 
 class UserEditForm(forms.ModelForm):
 

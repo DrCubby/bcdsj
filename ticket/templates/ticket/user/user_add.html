@@ -1,4 +1,9 @@
-{% if user.is_authenticated %}{% include 'ticket/user/user_menu.html' %}{% endif %}
+{% if user.is_authenticated %}
+    {% include 'ticket/user/user_menu.html' %}
+{% else %}
+    {% load static %}
+    <link rel="stylesheet" href="{%  static 'css/base/menu.css' %}">
+{% endif %}
 <script>menuSwitch('Add');</script>
 <form id="user_add" class="pure-form pure-form-aligned">
     <fieldset>
