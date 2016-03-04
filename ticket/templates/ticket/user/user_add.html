@@ -20,7 +20,7 @@
         {% endfor %}
         <div class="pure-controls">
             {% csrf_token %}
-            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'user_add' %}','user_add');return false;">{% if user.is_authenticated %}Add User{% else %}Register{% endif %}</div>
+            <button class="pure-button pure-button-primary" onclick="getFragment('{% url 'user_add' %}','user_add');return false;">{% if user.is_authenticated %}Add User{% else %}Register{% endif %}</button>
         </div>
     </fieldset>
 </form>

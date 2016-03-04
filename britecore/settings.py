@@ -25,9 +25,9 @@ PROJECT_DIR = os.path.dirname(__file__)
 SECRET_KEY = 'e^scl22hnuugahb9(w0=-q(%0d%f%bcx(2s*gxa@oy#18xv*t2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','tap2me.com']
 
 
 # Application definition
