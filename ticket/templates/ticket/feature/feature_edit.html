@@ -16,7 +16,7 @@
         {% endfor %}
         <div class="pure-controls">
             {% csrf_token %}
-            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'feature_edit' pk=object.id %}','feature_edit');return false;">Update Feature</div>
+            <button class="pure-button pure-button-primary" onclick="getFragment('{% url 'feature_edit' pk=object.id %}','feature_edit');return false;">Update Feature</button>
         </div>
     </fieldset>
 </form>

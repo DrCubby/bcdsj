@@ -212,3 +212,4 @@ def UserLogin(request):
         context['form'] = UserLoginForm()
         return render(request,'ticket/user/user_login.html', context)
     return render_to_response('ticket/user/user_login.html', context)
+

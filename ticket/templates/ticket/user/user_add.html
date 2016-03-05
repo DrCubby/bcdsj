@@ -1,4 +1,9 @@
-{% if user.is_authenticated %}{% include 'ticket/user/user_menu.html' %}{% endif %}
+{% if user.is_authenticated %}
+    {% include 'ticket/user/user_menu.html' %}
+{% else %}
+    {% load static %}
+    <link rel="stylesheet" href="{%  static 'css/base/menu.css' %}">
+{% endif %}
 <script>menuSwitch('Add');</script>
 <form id="user_add" class="pure-form pure-form-aligned">
     <fieldset>
@@ -20,7 +25,7 @@
         {% endfor %}
         <div class="pure-controls">
             {% csrf_token %}
-            <div class="pure-button pure-button-primary" onclick="getFragment('{% url 'user_add' %}','user_add');return false;">{% if user.is_authenticated %}Add User{% else %}Register{% endif %}</div>
+            <button class="pure-button pure-button-primary" onclick="getFragment('{% url 'user_add' %}','user_add');return false;">{% if user.is_authenticated %}Add User{% else %}Register{% endif %}</button>
         </div>
     </fieldset>
 </form>

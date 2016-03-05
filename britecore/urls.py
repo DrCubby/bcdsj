@@ -39,8 +39,7 @@ urlpatterns = [
     url(r'^product/list$', login_required(ProductList.as_view()), name='product_list'),
     url(r'^user/add$', UserAdd.as_view(), name='user_add'),
     url(r'^user/edit/(?P<pk>\d+)/$', login_required(UserEdit.as_view()), name='user_edit'),
-    url(r'^user/list$', login_required(UserList.as_view()), name='user_list'),
+    url(r'^user/list$', UserList.as_view(), name='user_list'),
     url(r'^user/login/$', UserLogin,name="user_login"),
     url(r'^user/logout/$', 'django.contrib.auth.views.logout',{'next_page': '/'},name='logout'),
-    url(r'^user/register$', TemplateView.as_view(template_name='ticket/user/user_register.html')),
 ]

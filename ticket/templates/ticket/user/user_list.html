@@ -1,3 +1,4 @@
+{% if user.is_authenticated %}
 {% include 'ticket/user/user_menu.html' %}
 <script>menuSwitch('List');</script>
 
@@ -24,3 +25,11 @@
         {% endfor %}
     </tbody>
 </table>
+{% else %}
+Well!
+
+Shouldn't you be logging in?
+
+<p><-- Click on To Log on!</p>
+
+{% endif%}
