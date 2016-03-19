@@ -1,0 +1,22 @@
+{% include 'ticket/sale/sale_menu.html' %}
+<script>menuSwitch('List');</script>
+<form id="sale_delete" method="POST"></form>
+<table class="pure-table" style="width:800px;">
+    <thead>
+        <tr>
+            <!--<th>ID</th>-->
+            <th style="width:100%;">Sale Number</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for object in object_list %}
+        <tr>
+            <!--<td>{{ object.id }}</td>-->
+            <td><a href="#" onclick="getFragment('{%  url 'sale_edit' pk=object.id %}','token')">{{ object.name }}</a></td>
+            <td><a class="button-delete" href="#" onclick="getFragment('{%  url 'sale_delete' pk=object.id %}','sale_delete');return false;">X</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

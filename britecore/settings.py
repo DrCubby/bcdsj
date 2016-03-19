@@ -18,14 +18,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_DIR = os.path.dirname(__file__)
 
 
-# Quick-start development settings - unsuitable for production
+# Quick-start development settings - unsuitable for statusion
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep the secret key used in statusion secret!
 SECRET_KEY = 'e^scl22hnuugahb9(w0=-q(%0d%f%bcx(2s*gxa@oy#18xv*t2'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# SECURITY WARNING: don't run with debug turned on in statusion!
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1','tap2me.com']
 
@@ -112,5 +112,8 @@ STATICFILES_DIRS = (
 STATIC_URL = '/static/' # default
 STATIC_ROOT = os.path.join(BASE_DIR, 'ticket/static')
 
+PROJECT_DIR = os.path.dirname(__file__)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'ticket/media')
+MEDIA_URL = '/media/'
 
 

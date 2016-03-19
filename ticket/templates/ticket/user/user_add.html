@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{%  static 'css/base/menu.css' %}">
 {% endif %}
 <script>menuSwitch('Add');</script>
-<form id="user_add" class="pure-form pure-form-aligned">
+<form id="user_add" class="pure-form pure-form-aligned" method="POST">
     <fieldset>
         {% if user.is_authenticated %}
             <legend class="legend">Add User</legend>

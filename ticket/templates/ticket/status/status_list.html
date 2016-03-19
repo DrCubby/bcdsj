@@ -1,6 +1,7 @@
-{% include 'ticket/client/client_menu.html' %}
+{% include 'ticket/status/status_menu.html' %}
 <script>menuSwitch('List');</script>
 
+<form id="status_delete" method="POST"></form>
 <table class="pure-table" style="width:800px;">
     <thead>
         <tr>
@@ -14,8 +15,8 @@
         {% for object in object_list %}
         <tr>
             <td>{{ object.id }}</td>
-            <td><a href="#" onclick="getFragment('{%  url 'client_edit' pk=object.id %}','token')">{{ object.name }}</a></td>
-            <td><a class="button-delete" href="#" onclick="getFragment('{%  url 'client_delete' pk=object.id %}','client_delete');return false;">X</a></td>
+            <td><a href="#" onclick="getFragment('{%  url 'status_edit' pk=object.id %}','token')">{{ object.name}}</a></td>
+            <td><a class="button-delete" href="#" onclick="getFragment('{%  url 'status_delete' pk=object.id %}','status_delete')">X</a></td>
         </tr>
         {% endfor %}
     </tbody>

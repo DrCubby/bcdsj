@@ -118,19 +118,19 @@ conventions of the files in the `build/` directory follow these rules:
   a responsive roll-up of everything, non-minified.
 
 * `pure-min.css`: Minified version of `pure.css` that should be used in
-  production.
+  statusion.
 
 * `pure-nr.css`: A Rollup of all modules without @media queries. This is a
   non-responsive roll-up of everything, non-minified.
 
 * `pure-nr-min.css`: Minified version of `pure-nr.css` that should be used in
-  production.
+  statusion.
 
 * `grids-responsive.css`: Unminified version of Pure's grid stylesheet which 
   includes @media queries.
 
 * `grids-responsive-min.css`: Minified version of `grids-responsive.css` that
-  should be used in production.
+  should be used in statusion.
 
 
 [Grunt]: http://gruntjs.com/

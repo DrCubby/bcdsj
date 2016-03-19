@@ -1125,7 +1125,7 @@ $.position = {
 		w2 = innerDiv.offsetWidth;
 
 		if ( w1 === w2 ) {
-			w2 = div[0].clientWidth;
+			w2 = div[0].saleWidth;
 		}
 
 		div.remove();
@@ -5352,7 +5352,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 			floating = innermostContainer.floating || this._isFloating(this.currentItem);
 			posProperty = floating ? "left" : "top";
 			sizeProperty = floating ? "width" : "height";
-			axis = floating ? "clientX" : "clientY";
+			axis = floating ? "saleX" : "saleY";
 
 			for (j = this.items.length - 1; j >= 0; j--) {
 				if(!$.contains(this.containers[innermostIndex].element[0], this.items[j].item[0])) {
@@ -8320,8 +8320,8 @@ $.extend(Datepicker.prototype, {
 
 		this._pos = (pos ? (pos.length ? pos : [pos.pageX, pos.pageY]) : null);
 		if (!this._pos) {
-			browserWidth = document.documentElement.clientWidth;
-			browserHeight = document.documentElement.clientHeight;
+			browserWidth = document.documentElement.saleWidth;
+			browserHeight = document.documentElement.saleHeight;
 			scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
 			scrollY = document.documentElement.scrollTop || document.body.scrollTop;
 			this._pos = // should use actual width/height below
@@ -8830,8 +8830,8 @@ $.extend(Datepicker.prototype, {
 			dpHeight = inst.dpDiv.outerHeight(),
 			inputWidth = inst.input ? inst.input.outerWidth() : 0,
 			inputHeight = inst.input ? inst.input.outerHeight() : 0,
-			viewWidth = document.documentElement.clientWidth + (isFixed ? 0 : $(document).scrollLeft()),
-			viewHeight = document.documentElement.clientHeight + (isFixed ? 0 : $(document).scrollTop());
+			viewWidth = document.documentElement.saleWidth + (isFixed ? 0 : $(document).scrollLeft()),
+			viewHeight = document.documentElement.saleHeight + (isFixed ? 0 : $(document).scrollTop());
 
 		offset.left -= (this._get(inst, "isRTL") ? (dpWidth - inputWidth) : 0);
 		offset.left -= (isFixed && offset.left === inst.input.offset().left) ? $(document).scrollLeft() : 0;

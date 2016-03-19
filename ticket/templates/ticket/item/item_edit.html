@@ -1,0 +1,49 @@
+{% include 'ticket/item/item_menu.html' %}
+
+<form id="item_edit" class="pure-form pure-form-aligned" method="POST">
+    <fieldset>
+        <legend class="legend">Edit Item</legend>
+        {% for field in form %}
+        <div class="pure-control-group">
+            <label for="{{ field.label }}">{{ field.label }}</label>
+            {{ field }}
+            {%  if field.help_text %}<span class="bctooltip" title="{{ field.help_text }}">?</a>{% endif %}
+            {% if field.errors %}
+            <span class="bcerror" title="{% for error in field.errors %}{{ error }}
+            {% endfor %}">&bull;</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div class="pure-controls">
+            {% csrf_token %}
+            <button class="pure-button pure-button-primary" onclick="getFragment('{% url 'item_edit' pk=object.id %}','item_edit');return false;">Update Item</button>
+        </div>
+    </fieldset>
+</form>
+
+{%  if sales %}
+<div style="margin-top:20px;">Sales</div>
+<table class="pure-table" style="width:800px;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th style="width:100%;">Sale</th>
+            <th>Priority</th>
+            <th>Target Date</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for sale in sales %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td><a href="#" onclick="getFragment('{%  url 'item_edit' pk=item.id %}','token')">{{ item.sale.name}}</a></td>
+            <td><a href="#" onclick="getFragment('{%  url 'item_edit' pk=item.id %}','token')">{{ item.priority}}</a></td>
+            <td><a href="#" onclick="getFragment('{%  url 'item_edit' pk=item.id %}','token')">{{ item.date_target|date:"Y-m-d"}}</a></td>
+            <td><a class="button-delete" href="#" onclick="getFragment('{%  url 'item_delete' pk=item.id %}','item_delete')">X</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}

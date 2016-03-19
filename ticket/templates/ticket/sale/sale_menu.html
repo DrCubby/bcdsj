@@ -1,0 +1,12 @@
+{% load static %}
+<link rel="stylesheet" href="{%  static 'css/base/menu.css' %}">
+
+<div id="myh1">Sale</div>
+<div class="myHeader">
+    <div id="horizontal" class="pure-menu pure-menu-horizontal" >
+        <ul class="pure-menu-list">
+            <li  id="menuList" class="pure-menu-item"><a href="#" class="pure-menu-link" onclick="getFragment('{% url 'sale_list' %}','token');return false;">List</a></li>
+            <li  id="menuAdd" class="pure-menu-item"><a href="#" class="pure-menu-link" onclick="getFragment('{% url 'sale_add' %}','token');return false">Add</a></li>
+        </ul>
+    </div>
+</div>

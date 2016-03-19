@@ -37,15 +37,15 @@
         <!-- Hamburger icon -->
         <span></span>
     </a>
-    <form id="token">{% csrf_token %}<input type="hidden" name="theType" value="form"><input type="hidden" id="pk" name="id" value=""></form>
+    <form id="token" method="GET">{% csrf_token %}<input type="hidden" name="theType" value="form"><input type="hidden" id="pk" name="id" value=""></form>
     <div id="menu">
         <div class="pure-menu">
             <a class="pure-menu-heading" href="/">BCDSJ</a>
             <ul class="pure-menu-list">
                 {% if user.is_authenticated %}
-                <li class="pure-menu-item"><div class="pure-menu-link" onclick="getFragment('{%  url 'feature_list' %}','token')">Features</div></li>
-                <li class="pure-menu-item"><div class="pure-menu-link" onclick="getFragment('{%  url 'client_list' %}','token')">Clients</div></li>
-                <li class="pure-menu-item"><div class="pure-menu-link" onclick="getFragment('{%  url 'product_list' %}','token')">Products</div></li>
+                <li class="pure-menu-item"><div class="pure-menu-link" onclick="getFragment('{%  url 'item_list' %}','token')">Items</div></li>
+                <li class="pure-menu-item"><div class="pure-menu-link" onclick="getFragment('{%  url 'sale_list' %}','token')">Sales</div></li>
+                <li class="pure-menu-item"><div class="pure-menu-link" onclick="getFragment('{%  url 'status_list' %}','token')">status</div></li>
                 <li class="pure-menu-item"><div class="pure-menu-link" onclick="getFragment('{%  url 'user_list' %}','token')">Users</div></li>
                 <li class="pure-menu-item"><a href="{% url 'logout' %}" class="pure-menu-link">Logout</a></li>
                 {%  else %}

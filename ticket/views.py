@@ -1,153 +1,159 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth import authenticate, login,logout,get_user_model, logout
 from django.shortcuts import render, render_to_response
-from django.db.models import F
+from django.db.models import F, Q
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from ticket.forms import  ClientAddForm, ClientEditForm, FeatureAddForm, FeatureEditForm,  ProductAddForm, \
-    ProductEditForm, UserAddForm, UserEditForm, UserLoginForm
-from ticket.models import Client, Feature, Product
+from ticket.forms import  SaleAddForm, SaleEditForm, ItemAddForm, ItemEditForm,  StatusAddForm, \
+    StatusEditForm, UserAddForm, UserEditForm, UserLoginForm
+from ticket.models import Sale, Item, Status
 from django.core.urlresolvers import reverse_lazy
 from braces import views
 User =  get_user_model()
 
-class ClientAdd(CreateView, views.PermissionRequiredMixin):
+class SaleAdd(views.PermissionRequiredMixin, CreateView):
     """
-        Add a client.
+        Add a sale.
     """
-    model = Client
-    form_class = ClientAddForm
-    permissions = 'ticket.add_client'
-    template_name = 'ticket/client/client_add.html'
-    success_url = reverse_lazy('client_list')
+    model = Sale
+    form_class = SaleAddForm
+    permission_required = 'ticket.add_sale'
+    template_name = 'ticket/sale/sale_add.html'
+    success_url = reverse_lazy('sale_list')
 
-class ClientEdit(UpdateView):
+class SaleEdit(UpdateView):
     """
         Edit a user
     """
-    model = Client
-    form_class = ClientEditForm
-    template_name = 'ticket/client/client_edit.html'
-    success_url = reverse_lazy('client_list')
+    model = Sale
+    form_class = SaleEditForm
+    template_name = 'ticket/sale/sale_edit.html'
+    success_url = reverse_lazy('sale_list')
 
     def get_context_data(self, **kwargs):
-        context = super(ClientEdit, self).get_context_data(**kwargs)
-        context['features'] = Feature.objects.filter(client_id=self.kwargs.get('pk')).order_by('client__name','priority','date_target')
+        context = super(SaleEdit, self).get_context_data(**kwargs)
+        context['items'] = Item.objects.filter(sale_id=self.kwargs.get('pk')).order_by('sale__name','priority','date_target')
         return context
 
-class ClientDelete(DeleteView):
+class SaleDelete(views.PermissionRequiredMixin,DeleteView):
     """
-        Delete a user
+        Delete a sale
     """
-    model = Client
-    permissions = 'ticket.delete_client'
-    success_url = reverse_lazy('client_list')
+    model = Sale
+    permission_required = 'ticket.delete_sale'
+    template_name = 'ticket/sale/sale_confirm_delete.html'
+    success_url = reverse_lazy('sale_list')
 
-class ClientList(ListView, views.PermissionRequiredMixin, views.LoginRequiredMixin):
+class SaleList(ListView, views.PermissionRequiredMixin, views.LoginRequiredMixin):
     """
     List of existing users.
     """
     login_url = reverse_lazy('user_ass')
     redirect_field_name = 'redirect_to'
-    model = Client
-    form_class = ClientAddForm
-    permissions = 'ticket.change_client'
-    template_name = 'ticket/client/client_list.html'
+    model = Sale
+    form_class = SaleAddForm
+    permissions = 'ticket.change_sale'
+    template_name = 'ticket/sale/sale_list.html'
 
     def get_queryset(self):
-        return Client.objects.all().order_by('name')
+        return Sale.objects.all().order_by('name')
 
-class FeatureAdd(CreateView, views.PermissionRequiredMixin):
+class ItemAdd(CreateView, views.PermissionRequiredMixin):
     """
-        Add a client.
+        Add a sale.
     """
-    model = Feature
-    form_class = FeatureAddForm
-    permissions = 'ticket.add_feature'
-    template_name = 'ticket/feature/feature_add.html'
-    success_url = reverse_lazy('feature_list')
+    model = Item
+    form_class = ItemAddForm
+    permissions = 'ticket.add_item'
+    template_name = 'ticket/item/item_add.html'
+    success_url = reverse_lazy('item_list')
 
     def form_valid(self, form):
-        features = Feature.objects.filter(client_id = form.instance.client_id).filter(priority__gte=form.instance.priority).update(priority=F('priority')+1)
-        return super(FeatureAdd, self).form_valid(form)
+        items = Item.objects.filter(sale_id = form.instance.sale_id)
+        return super(ItemAdd, self).form_valid(form)
 
-class FeatureEdit(UpdateView):
+class ItemEdit(UpdateView):
     """
         Edit a user
     """
-    model = Feature
-    form_class = FeatureEditForm
-    template_name = 'ticket/feature/feature_edit.html'
-    success_url = reverse_lazy('feature_list')
+    model = Item
+    form_class = ItemEditForm
+    template_name = 'ticket/item/item_edit.html'
+    success_url = reverse_lazy('item_list')
 
-    def form_valid(self, form):
-        features = Feature.objects.filter(client_id = form.instance.client_id).filter(priority__gte=form.instance.priority).update(priority=F('priority')+1)
-        return super(FeatureEdit, self).form_valid(form)
+    #def form_valid(self, form):
+     #   items = Item.objects.filter(sale_id = form.instance.sale_id).filter(priority__gte=form.instance.priority).update(priority=F('priority')+1)
+      #  return super(ItemEdit, self).form_valid(form)
 
-class FeatureDelete(DeleteView):
+class ItemDelete(DeleteView):
     """
         Delete a user
     """
-    model = Feature
-    permissions = 'ticket.delete_feature'
-    success_url = reverse_lazy('feature_list')
+    model = Item
+    permissions = 'ticket.delete_item'
+    success_url = reverse_lazy('item_list')
 
-class FeatureList(ListView, views.PermissionRequiredMixin, ):
+class ItemList(ListView, views.PermissionRequiredMixin, ):
     """
-    List of existing users.
+    List of existing items.
     """
-    model = Feature
-    form_class = FeatureAddForm
-    permissions = 'ticket.change_feature'
-    template_name = 'ticket/feature/feature_list.html'
+    model = Item
+    form_class = ItemAddForm
+    permissions = 'ticket.change_item'
+    template_name = 'ticket/item/item_list.html'
+
+class ItemSearch(views.PermissionRequiredMixin,ListView):
+
+    model = Item
+    form_class = ItemAddForm
+    permission_required = 'ticket.change_item'
+    template_name = 'ticket/item/item_list.html'
 
     def get_queryset(self):
-        return Feature.objects.all().order_by('client__name','priority')
+        return Item.objects.filter(Q(title__icontains=self.request.GET['search_term'])
+                                   | Q(sale__name=self.request.GET['search_term'])
+                                   | Q(status__name=self.request.GET['search_term'])
+                                   | Q(purchase_number__icontains=self.request.GET['search_term']))
 
-class ProductAdd(CreateView, views.PermissionRequiredMixin):
+class StatusAdd(CreateView, views.PermissionRequiredMixin):
     """
-        Add a client.
+        Add a sale.
     """
-    model = Product
-    form_class = ProductAddForm
-    permissions = 'ticket.add_product'
-    template_name = 'ticket/product/product_add.html'
-    success_url = reverse_lazy('product_list')
+    model = Status
+    form_class = StatusAddForm
+    permissions = 'ticket.add_status'
+    template_name = 'ticket/status/status_add.html'
+    success_url = reverse_lazy('status_list')
 
-class ProductEdit(UpdateView):
+class StatusEdit(UpdateView):
     """
         Edit a user
     """
-    model = Product
-    form_class = ProductEditForm
-    template_name = 'ticket/product/product_edit.html'
-    success_url = reverse_lazy('product_list')
+    model = Status
+    form_class = StatusEditForm
+    template_name = 'ticket/status/status_edit.html'
+    success_url = reverse_lazy('status_list')
 
-    def get_context_data(self, **kwargs):
-        context = super(ProductEdit, self).get_context_data(**kwargs)
-        context['features'] = Feature.objects.filter(product_id=self.kwargs.get('pk')).order_by('client__name','priority','date_target')
-        return context
-
-class ProductDelete(DeleteView):
+class StatusDelete(DeleteView):
     """
         Delete a user
     """
-    model = Product
-    permissions = 'ticket.delete_product'
-    success_url = reverse_lazy('product_list')
+    model = Status
+    permissions = 'ticket.delete_status'
+    success_url = reverse_lazy('status_list')
 
-class ProductList(ListView, views.PermissionRequiredMixin, views.LoginRequiredMixin):
+class StatusList(ListView, views.PermissionRequiredMixin, views.LoginRequiredMixin):
     """
     List of existing users.
     """
-    model = Product
-    form_class = ProductAddForm
-    permissions = 'ticket.change_product'
-    template_name = 'ticket/product/product_list.html'
+    model = Status
+    form_class = StatusAddForm
+    permissions = 'ticket.change_status'
+    template_name = 'ticket/status/status_list.html'
     login_url = reverse_lazy('user_add')
 
     def get_queryset(self):
-        return Product.objects.all().order_by('name')
+        return Status.objects.all().order_by('name')
 
 class UserAdd(CreateView, views.PermissionRequiredMixin):
     """

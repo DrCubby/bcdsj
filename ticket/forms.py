@@ -1,45 +1,45 @@
 from django import forms
-from ticket.models import Client, Feature, Product
+from ticket.models import Sale, Item, Status
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-class ClientAddForm(forms.ModelForm):
+class SaleAddForm(forms.ModelForm):
     class Meta:
-        model = Client
+        model = Sale
         fields = '__all__'
 
-class ClientEditForm(forms.ModelForm):
+class SaleEditForm(forms.ModelForm):
 
 	class Meta:
-		model = Client
+		model = Sale
 		fields = '__all__'
 
-class FeatureAddForm(forms.ModelForm):
-	client = forms.ModelChoiceField(queryset=Client.objects.order_by('name'))
-	product = forms.ModelChoiceField(queryset=Product.objects.order_by('name'))
+class ItemAddForm(forms.ModelForm):
+	sale = forms.ModelChoiceField(queryset=Sale.objects.order_by('name'))
+	status = forms.ModelChoiceField(queryset=Status.objects.order_by('name'))
 
 	class Meta:
-		model = Feature
+		model = Item
 		exclude =['date_created']
 
-class FeatureEditForm(forms.ModelForm):
-	client = forms.ModelChoiceField(queryset=Client.objects.order_by('name'))
-	product = forms.ModelChoiceField(queryset=Product.objects.order_by('name'))
+class ItemEditForm(forms.ModelForm):
+	sale = forms.ModelChoiceField(queryset=Sale.objects.order_by('name'))
+	status = forms.ModelChoiceField(queryset=Status.objects.order_by('name'))
 
 	class Meta:
-		model = Feature
+		model = Item
 		exclude =['date_created']
 
-class ProductAddForm(forms.ModelForm):
+class StatusAddForm(forms.ModelForm):
     class Meta:
-        model = Product
+        model = Status
         fields = '__all__'
 
-class ProductEditForm(forms.ModelForm):
+class StatusEditForm(forms.ModelForm):
 
 	class Meta:
-		model = Product
+		model = Status
 		fields = '__all__'
 
 

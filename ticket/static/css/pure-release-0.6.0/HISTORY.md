@@ -181,7 +181,7 @@ a bit less opinionated, a bit easier to customize on top.
 
 * Added non-minified rollup files: `pure.css` and `pure-nr.css`. These files are
   created in addition to the minified rollups: `pure-min.css` and
-  `pure-nr-min.css`. The minified rollups _should_ be used in production.
+  `pure-nr-min.css`. The minified rollups _should_ be used in statusion.
   ([#171][] @omeid)
 
 ### Base

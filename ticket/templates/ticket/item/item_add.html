@@ -1,23 +1,23 @@
-{% include 'ticket/product/product_menu.html' %}
+{% include 'ticket/item/item_menu.html' %}
 <script>menuSwitch('Add');</script>
 
-<form id="product_add" class="pure-form pure-form-aligned">
+<form id="item_add" class="pure-form pure-form-aligned" method="POST">
     <fieldset>
-        <legend class="legend">Add Product</legend>
+        <legend class="legend">Add Item</legend>
         {% for field in form %}
         <div class="pure-control-group">
             <label for="{{ field.label }}">{{ field.label }}</label>
             {{ field }}
-             {%  if field.help_text %}<span class="bctooltip" title="{{ field.help_text }}">?</a>{% endif %}
+            {%  if field.help_text %}<span class="bctooltip" title="{{ field.help_text }}">?</a>{% endif %}
             {% if field.errors %}
             <span class="bcerror" title="{% for error in field.errors %}{{ error }}
             {% endfor %}">&bull;</a>
             {% endif %}
-       </div>
+        </div>
         {% endfor %}
         <div class="pure-controls">
             {% csrf_token %}
-            <button class="pure-button pure-button-primary" onclick="getFragment('{% url 'product_add' %}','product_add');return false;">Add Product</button>
+            <button class="pure-button pure-button-primary" onclick="getFragment('{% url 'item_add' %}','item_add');return false;">Add Item</button>
         </div>
     </fieldset>
 </form>

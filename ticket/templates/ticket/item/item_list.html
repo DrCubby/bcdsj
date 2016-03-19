@@ -1,0 +1,61 @@
+{% include 'ticket/item/item_menu.html' %}
+<script>menuSwitch('List');</script>
+
+<form id="item_delete" method="POST"></form>
+<table class="pure-table" style="width:800px;">
+    <thead>
+        <tr>
+            <th>Item number</th>
+            <th>Title</th>
+            <th>Sale Number</th>
+            <th>Status</th>
+            <th>Image</th>
+            <th>Ebay Item number</th>
+            <th>Purchase Price</th>
+            <th>Metal</th>
+            <th>Carat</th>
+            <th>Date bought</th>
+            <th>Date sold</th>
+            <th>Weight</th>
+            <th>Size</th>
+            <th>Stone</th>
+            <th>Sold Price</th>
+            <th>Sale Place</th>
+            <th>Archive</th>
+
+           <!-- <th>Delete</th>-->
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in object_list %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td><a href="#" onclick="getFragment('{%  url 'item_edit' pk=item.id %}','token')">{{ item.title}}</a></td>
+            <td style="white-space: nowrap;"><a href="#" onclick="getFragment('{%  url 'item_edit' pk=item.id %}','token')">{{ item.sale.name}}</a></td>
+            <td style="white-space: nowrap;">{{ item.status}}</td>
+            {%  if item.image %}
+                <td style="white-space: nowrap;"><img src="{{ item.image.url }}" style="height:100px; width:100px;" alt="" /></td>
+            {% else %}
+                <td></td>
+            {% endif %}
+            <td style="white-space: nowrap;">{{ item.purchase_number}}</td>
+            <td style="white-space: nowrap;">{{ item.purchase_price}}</td>
+            <td style="white-space: nowrap;">{{ item.metal}}</td>
+            <td style="white-space: nowrap;">{{ item.carat}}</td>
+            <td style="white-space: nowrap;">{{ item.date_bought}}</td>
+            {%  if item.date_sold %}
+                <td style="white-space: nowrap;">{{ item.date_sold}}</td>
+            {% else %}
+                <td></td>
+            {% endif %}
+            <td style="white-space: nowrap;">{{ item.weight}}</td>
+            <td style="white-space: nowrap;">{{ item.size}}</td>
+            <td style="white-space: nowrap;">{{ item.stone}}</td>
+            <td style="white-space: nowrap;">{{ item.sold_price}}</td>
+            <td style="white-space: nowrap;">{{ item.sale_place}}</td>
+            <td><a class="button-delete" href="#" onclick="getFragment('{%  url 'item_delete' pk=item.id %}','item_delete')">X</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -10,9 +10,19 @@ function getFragment(url,theForm,theID) {
        theForm: the form data being sent.  supports file uploads using FormData
        theID:  the idea (if any) of the get object being requested
      */
-    var method = theForm == 'token'? 'GET':'POST';
+    var method = $('#' + theForm).attr('method');
     var csrftoken = $('#token').find("input[name='csrfmiddlewaretoken']").val()
-    var formData = new FormData(document.getElementById(theForm));
+    if(method == undefined) {
+        method = 'GET';
+    } else if(method=='POST') {
+        var formData = new FormData(document.getElementById(theForm));
+    } else if(theForm != 'token') {
+        var formData = '';
+        url = url + '?';
+        $('#' + theForm + ' input').each(function( index ) {
+            url = url + '&' + $(this).attr('name') + '=' + $(this).val();
+        });
+    }
 
     // setup ajax by submitting csrf token if required
     $.ajaxSetup({
