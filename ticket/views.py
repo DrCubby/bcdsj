@@ -21,19 +21,6 @@ class SaleAdd(views.PermissionRequiredMixin, CreateView):
     template_name = 'ticket/sale/sale_add.html'
     success_url = reverse_lazy('sale_list')
 
-class SaleEdit(UpdateView):
-    """
-        Edit a user
-    """
-    model = Sale
-    form_class = SaleEditForm
-    template_name = 'ticket/sale/sale_edit.html'
-    success_url = reverse_lazy('sale_list')
-
-    def get_context_data(self, **kwargs):
-        context = super(SaleEdit, self).get_context_data(**kwargs)
-        context['items'] = Item.objects.filter(sale_id=self.kwargs.get('pk')).order_by('sale__name','priority','date_target')
-        return context
 
 class SaleDelete(views.PermissionRequiredMixin,DeleteView):
     """
@@ -102,6 +89,9 @@ class ItemList(ListView, views.PermissionRequiredMixin, ):
     permissions = 'ticket.change_item'
     template_name = 'ticket/item/item_list.html'
 
+   #def get_context_data(self, **kwargs):
+
+
 class ItemSearch(views.PermissionRequiredMixin,ListView):
 
     model = Item
@@ -113,7 +103,17 @@ class ItemSearch(views.PermissionRequiredMixin,ListView):
         return Item.objects.filter(Q(title__icontains=self.request.GET['search_term'])
                                    | Q(sale__name=self.request.GET['search_term'])
                                    | Q(status__name=self.request.GET['search_term'])
-                                   | Q(purchase_number__icontains=self.request.GET['search_term']))
+                                   | Q(purchase_number__icontains=self.request.GET['search_term'])
+                                   | Q(purchase_price__icontains=self.request.GET['search_term'])
+                                   | Q(sold_price__icontains=self.request.GET['search_term'])
+                                   | Q(sale_place=self.request.GET['search_term'])
+                                   | Q(metal__icontains=self.request.GET['search_term'])
+                                   | Q(carat=self.request.GET['search_term'])
+                                   | Q(date_bought__icontains=self.request.GET['search_term'])
+                                   | Q(date_sold__icontains=self.request.GET['search_term'])
+                                   | Q(stone__icontains=self.request.GET['search_term']))
+
+
 
 class StatusAdd(CreateView, views.PermissionRequiredMixin):
     """
@@ -205,7 +205,6 @@ def UserLogin(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-
         if user is not None:
             if user.is_active:
                 login(request, user)

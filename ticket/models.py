@@ -38,16 +38,19 @@ class Item(models.Model):
     #url = models.URLField(blank=True)
     #date_created = models.DateField(default=timezone.now)
     image = models.ImageField(upload_to = 'img', null=True, blank=True)
-    purchase_price = models.IntegerField(blank=False, default=0, null=False)
+    purchase_price = models.CharField(max_length=50, null=True, blank=True)
     sold_price = models.IntegerField(blank=False, default=0, null=False)
     sale_place = models.CharField(max_length=50, choices=sale_place_choices, default=Unsold)
     metal = models.CharField(max_length=50, null=True, blank=True)
     carat = models.CharField(max_length=50, null=True, blank=True)
     date_bought = models.DateField(blank=True, null=True)
     date_sold = models.DateField(blank=True, null=True)
-    weight = models.IntegerField(blank=True,default=0,null=True)
+    weight = models.CharField(max_length=50, null=True, blank=True)
     size = models.CharField(max_length=50, null=True, blank=True)
     stone = models.CharField(max_length=50, null=True, blank=True)
+    notes = models.CharField(max_length=250, null=True, blank=True)
+    face_size = models.IntegerField(blank=True, default=0, null=True)
+
 
 
     def __str__(self):

@@ -18,7 +18,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import admin
 from django.contrib.auth import views
 from django.views.generic import TemplateView
-from ticket.views import SaleAdd, SaleDelete,SaleEdit, SaleList, UserAdd, ItemAdd,ItemDelete,\
+from ticket.views import SaleAdd, SaleDelete, SaleList, UserAdd, ItemAdd,ItemDelete,\
     ItemEdit, ItemList, ItemSearch, StatusAdd, StatusDelete, StatusEdit, StatusList, UserEdit, UserList,\
     UserLogin
 from django.conf import settings
@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^sale/add$', login_required(SaleAdd.as_view()), name="sale_add"),
     url(r'^sale/delete/(?P<pk>\d+)/$', login_required(SaleDelete.as_view()), name="sale_delete"),
-    url(r'^sale/edit/(?P<pk>\d+)/$', login_required(SaleEdit.as_view()), name="sale_edit"),
+    #url(r'^sale/edit/(?P<pk>\d+)/$', login_required(SaleEdit.as_view()), name="sale_edit"),
     url(r'^sale/list$', login_required(SaleList.as_view()), name="sale_list"),
     url(r'^item/add$', login_required(ItemAdd.as_view()), name='item_add'),
     url(r'^item/delete/(?P<pk>\d+)/$', login_required(ItemDelete.as_view()), name="item_delete"),

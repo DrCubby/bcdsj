@@ -1,17 +1,28 @@
 {% include 'ticket/item/item_menu.html' %}
+<style>
+    .red {
+        color:red;
+        font-size:18pt;
+    }
+</style>
 <script>menuSwitch('List');</script>
+
+<select>
+  <option value="status">{{ status.objects.all }}</option>
+</select>
 
 <form id="item_delete" method="POST"></form>
 <table class="pure-table" style="width:800px;">
     <thead>
         <tr>
-            <th>Item number</th>
+            <th>Select</th>
+            <th>Item</th>
             <th>Title</th>
-            <th>Sale Number</th>
+            <th>Sale</th>
             <th>Status</th>
             <th>Image</th>
-            <th>Ebay Item number</th>
-            <th>Purchase Price</th>
+            <th>Ebay</th>
+            <th>Bought $</th>
             <th>Metal</th>
             <th>Carat</th>
             <th>Date bought</th>
@@ -21,6 +32,7 @@
             <th>Stone</th>
             <th>Sold Price</th>
             <th>Sale Place</th>
+            <th>Face Sz</th>
             <th>Archive</th>
 
            <!-- <th>Delete</th>-->
@@ -30,7 +42,12 @@
     <tbody>
         {% for item in object_list %}
         <tr>
-            <td>{{ item.id }}</td>
+            <td><input type="checkbox" name="edit" value="item.id"></td>
+            {%  if item.notes %}
+                <td style="white-space: nowrap;">{{ item.id }} <span class="red">*</span> </td>
+            {% else %}
+                <td>{{ item.id }}</td>
+            {% endif %}
             <td><a href="#" onclick="getFragment('{%  url 'item_edit' pk=item.id %}','token')">{{ item.title}}</a></td>
             <td style="white-space: nowrap;"><a href="#" onclick="getFragment('{%  url 'item_edit' pk=item.id %}','token')">{{ item.sale.name}}</a></td>
             <td style="white-space: nowrap;">{{ item.status}}</td>
@@ -54,6 +71,7 @@
             <td style="white-space: nowrap;">{{ item.stone}}</td>
             <td style="white-space: nowrap;">{{ item.sold_price}}</td>
             <td style="white-space: nowrap;">{{ item.sale_place}}</td>
+            <td style="white-space: nowrap;">{{ item.face_size}}</td>
             <td><a class="button-delete" href="#" onclick="getFragment('{%  url 'item_delete' pk=item.id %}','item_delete')">X</a></td>
         </tr>
         {% endfor %}

@@ -32,7 +32,6 @@ function getFragment(url,theForm,theID) {
             }
         }
     });
-
     // clear the retainer
     // go get it
     $('#content-fragment').html('');
